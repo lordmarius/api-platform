@@ -1,6 +1,6 @@
 # Development environment override
 services:
-  php:
+  trypandgo-api:
     build:
       context: ./api
       target: frankenphp_dev
@@ -21,20 +21,20 @@ services:
       - host.docker.internal:host-gateway
     tty: true
 
-  pwa:
+  trypandgo-client:
     build:
-      context: ./pwa
+      context: ./client
       target: dev
     volumes:
-      - ./pwa:/srv/app
+      - ./client:/srv/app
     environment:
-      API_PLATFORM_CREATE_CLIENT_ENTRYPOINT: http://php
+      API_PLATFORM_CREATE_CLIENT_ENTRYPOINT: http://trypandgo-api
       API_PLATFORM_CREATE_CLIENT_OUTPUT: .
       # On Linux, you may want to comment the following line for improved performance
       WATCHPACK_POLLING: "true"
 
 ###> doctrine/doctrine-bundle ###
-  database:
+  trypandgo-db:
     ports:
       - target: 5432
         published: 5432
