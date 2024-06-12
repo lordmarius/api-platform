@@ -3,7 +3,7 @@ services:
     image: trypandgo-api
     depends_on:
       - trypandgo-db
-    restart: unless-stopped
+    restart: no
     environment:
       PWA_UPSTREAM: trypandgo-client:3000
       SERVER_NAME: ${SERVER_NAME}, trypandgo-api:80
