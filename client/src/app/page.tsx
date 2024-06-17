@@ -1,8 +1,9 @@
-import Welcome from "@/components/Welcome"
+import { Card } from "@tremor/react"
+
 
 const page = () => {
     return (
-        <Welcome />
+        <Card className="w-full md:w-6/12">Hola</Card>
     )
 }
 export default page
