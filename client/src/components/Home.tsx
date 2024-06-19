@@ -1,20 +1,22 @@
 'use client'
 
-import { Callout, Card, List, ListItem, Table, TableBody, TableCell, TableRow } from "@tremor/react"
+import { Callout, Card, Table, TableBody, TableCell, TableRow } from "@tremor/react"
 import { useQuery } from "@tanstack/react-query";
+import { getGreetings } from "@/actions/greetings";
 
 const Home = () => {
 
-    const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await fetch("/greetings").then((res) => {
-            return res.json()
-        }),
+    const { data, isLoading, isError, error } = useQuery({
+        // queryFn: () => fetch("/greetings").then((res) => res.json()),
+        queryFn: () => getGreetings(),
         queryKey: ["greetings"]
-      });
+    })
 
-      if (isLoading) return <Card>Cargando...</Card>;
-      if (isError) return <Callout color="red" title="Error">Sorry There was an Error</Callout>;
-
+    if (isLoading) return <Card>Cargando...</Card>
+    if (isError) {
+        console.error(error)
+        return <Callout color="red" title="Error">Sorry There was an Error: { error.toString() }</Callout>
+    }
     const greetings = data['hydra:member']
 
     return (

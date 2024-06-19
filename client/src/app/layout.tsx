@@ -1,5 +1,7 @@
-import { ReactQueryClientProvider } from "@/providers/query-provider"
+import Providers from "@/providers/providers"
+// import { ReactQueryClientProvider } from "@/providers/query-provider"
 import "@/styles/globals.css"
+import { QueryClientProvider } from "@tanstack/react-query"
 
 import { Metadata } from 'next'
 
@@ -16,9 +18,9 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body>
-                <ReactQueryClientProvider>
+                <Providers>
                     {children}
-                </ReactQueryClientProvider>
+                </Providers>
             </body>
         </html>
     )
